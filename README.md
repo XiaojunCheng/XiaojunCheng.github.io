@@ -24,6 +24,7 @@
 	- [如何高效利用GitHub](http://www.yangzhiping.com/tech/github.html)
 	- git闯关游戏[`githug`](https://github.com/Gazler/githug)
 	- [Git分支管理策略By`阮一峰`](http://www.ruanyifeng.com/blog/2012/07/git.html)
+	- [git简明指南](http://rogerdudler.github.io/git-guide/index.zh.html)
 3. IntelliJ IDEA
 	- [IntelliJ IDEA 使用教程@极客学院](http://wiki.jikexueyuan.com/project/intellij-idea-tutorial/)
 	- [IntelliJ IDEA 使用教程@Github](https://github.com/judasn/IntelliJ-IDEA-Tutorial/)
