@@ -9,6 +9,7 @@
 3. Maven学习
 4. 搭建博客
 	- [博客模板一](https://holys.im/)
+	- [jekyll](http://jekyllcn.com/)
 
 
 ## 二、计划
