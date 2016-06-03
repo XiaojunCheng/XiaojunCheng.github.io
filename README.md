@@ -10,6 +10,7 @@
 4. 搭建博客
 	- [博客模板一](https://holys.im/)
 	- [jekyll](http://jekyllcn.com/)
+	- [前端开发手册](https://dwqs.gitbooks.io/frontenddevhandbook/content/index.html)
 
 
 ## 二、计划
