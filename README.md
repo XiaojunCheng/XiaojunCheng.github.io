@@ -8,7 +8,7 @@
 2. Gitbook使用学习
 3. Maven学习
 4. 搭建博客
-	- [博客模板一](https://holys.im/)
+	- [博客模板一 https://holys.im/](https://github.com/holys/holys.github.io)
 	- [jekyll](http://jekyllcn.com/)
 	- [前端开发手册](https://dwqs.gitbooks.io/frontenddevhandbook/content/index.html)
 
