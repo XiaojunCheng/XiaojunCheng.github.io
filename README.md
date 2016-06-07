@@ -66,6 +66,7 @@
 ### 3.2 `生活娱乐类型`
 
 1. [知乎日报](http://daily.zhihu.com/)
+2. [v2ex](https://www.v2ex.com/)
 
 
 ## 四、读书 & 娱乐
