@@ -17,35 +17,42 @@
 
 ### 2.1 `6月份安排`
 
-1. Netty
-	- `remoting`代码阅读
+1. Netty学习
+	- ~~`remoting`代码阅读~~
 	- 文档
-		- [Netty实战精髓 - Essential Netty in Action](https://www.gitbook.com/book/waylau/essential-netty-in-action/details)
-		- [Netty学习笔记](http://skyao.github.io/leaning-netty/buffer/buffer.html)
+		- [~~Netty实战精髓 - Essential Netty in Action~~](https://www.gitbook.com/book/waylau/essential-netty-in-action/details)
+		- [~~Netty学习笔记~~](http://skyao.github.io/leaning-netty/buffer/buffer.html)
 2. Github
 	- [如何高效利用GitHub](http://www.yangzhiping.com/tech/github.html)
 	- git闯关游戏[`githug`](https://github.com/Gazler/githug)
 	- [Git分支管理策略By`阮一峰`](http://www.ruanyifeng.com/blog/2012/07/git.html)
 	- [git简明指南](http://rogerdudler.github.io/git-guide/index.zh.html)
-3. IntelliJ IDEA
+3. ~~IntelliJ IDEA~~
 	- [IntelliJ IDEA 使用教程@极客学院](http://wiki.jikexueyuan.com/project/intellij-idea-tutorial/)
 	- [IntelliJ IDEA 使用教程@Github](https://github.com/judasn/IntelliJ-IDEA-Tutorial/)
 	- [IntelliJ IDEA Mac快捷键](https://resources.jetbrains.com/assets/products/intellij-idea/IntelliJIDEA_ReferenceCard_Mac.pdf)
 4. 延迟消息队列实现分析
-	- [有赞延迟队列设计](http://tech.youzan.com/queuing_delay)
-		- [redis 有序集(Sorted Set)](https://redis.readthedocs.org/en/2.4/sorted_set.html)
-	- [分布式延迟消息队列](http://zhangyp.net/rabbitmq-delayqueue/)
+	- [~~有赞延迟队列设~~计](http://tech.youzan.com/queuing_delay)
+	- [~~分布式延迟消息队列~~](http://zhangyp.net/rabbitmq-delayqueue/)
 	- [beanstalk](http://kr.github.io/beanstalkd/download.html)
-5. 本机搭建一套redis环境
+		- [~~TrendrrBeanstalk源码阅读~~ Java Client](https://github.com/dustismo/TrendrrBeanstalk)
+5. redis学习
+	- ~~本机搭建一套redis环境~~
+	- [redis 有序集(Sorted Set)](https://redis.readthedocs.org/en/2.4/sorted_set.html)
+6. Guava学习
+	- RateLimitor
+7. 分库分表代码阅读
+8. HTTP协议学习
+9. html & css & javascript
+	- [~~HTML+CSS基础课程~~](http://www.imooc.com/code/)
+	- [~~JavaScript入门篇~~](http://www.imooc.com/code)
 
 ### 2.2 	`TODO List`
 
-1. TCP/IP & HTTP协议学习
-2. Guava学习
-	- RateLimitor使用
-3. SpringMVC学习
+1. TCP/IP
+2. SpringMVC学习
 	- Servlet & JSP原理
-4. RPC框架学习
+3. RPC框架学习
 	- 源码阅读
 		- Dubbo
 		- Motan
