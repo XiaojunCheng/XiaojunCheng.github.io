@@ -5,9 +5,8 @@
 
 1. Vim学习
      - [Vim大冒险](http://vim-adventures.com/)
-2. Gitbook使用学习
-3. Maven学习
-4. 搭建博客
+2. Maven学习
+3. 搭建博客
 	- [博客模板一 https://holys.im/](https://github.com/holys/holys.github.io)
 	- [jekyll](http://jekyllcn.com/)
 	- [前端开发手册](https://dwqs.gitbooks.io/frontenddevhandbook/content/index.html)
@@ -34,8 +33,10 @@
 4. 延迟消息队列实现分析
 	- [~~有赞延迟队列设~~计](http://tech.youzan.com/queuing_delay)
 	- [~~分布式延迟消息队列~~](http://zhangyp.net/rabbitmq-delayqueue/)
+	- [rabbitmq](https://geewu.gitbooks.io/rabbitmq-quick)
 	- [beanstalk](http://kr.github.io/beanstalkd/download.html)
 		- [~~TrendrrBeanstalk源码阅读~~ Java Client](https://github.com/dustismo/TrendrrBeanstalk)
+		- [~~beanstalk原理分析~~](http://www.xuetimes.com/archives/567)
 5. redis学习
 	- ~~本机搭建一套redis环境~~
 	- [redis 有序集(Sorted Set)](https://redis.readthedocs.org/en/2.4/sorted_set.html)
@@ -46,8 +47,10 @@
 9. html & css & javascript
 	- [~~HTML+CSS基础课程~~](http://www.imooc.com/code/)
 	- [~~JavaScript入门篇~~](http://www.imooc.com/code)
+10. Gitbook使用学习
 
-### 2.2 	`TODO List`
+
+### 2.2 `TODO List`
 
 1. TCP/IP
 2. SpringMVC学习
