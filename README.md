@@ -37,17 +37,19 @@
 	- [beanstalk](http://kr.github.io/beanstalkd/download.html)
 		- [~~TrendrrBeanstalk源码阅读~~ Java Client](https://github.com/dustismo/TrendrrBeanstalk)
 		- [~~beanstalk原理分析~~](http://www.xuetimes.com/archives/567)
-5. redis学习
-	- ~~本机搭建一套redis环境~~
-	- [redis 有序集(Sorted Set)](https://redis.readthedocs.org/en/2.4/sorted_set.html)
+5. Linux命令学习
+	- cat，more，less，chmod，chown，wc, tail，scp，find，grep，tar，curl，wget，awk，sed
 6. Guava学习
 	- RateLimitor
-7. 分库分表代码阅读
-8. HTTP协议学习
-9. html & css & javascript
+7. html & css & javascript
 	- [~~HTML+CSS基础课程~~](http://www.imooc.com/code/)
 	- [~~JavaScript入门篇~~](http://www.imooc.com/code)
-10. Gitbook使用学习
+8. redis学习
+	- ~~本机搭建一套redis环境~~
+	- [redis 有序集(Sorted Set)](https://redis.readthedocs.org/en/2.4/sorted_set.html)
+9. binlog痛苦 & 分库分表代码阅读
+10. HTTP协议学习
+11. Gitbook使用学习
 
 
 ### 2.2 `TODO List`
