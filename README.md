@@ -67,7 +67,7 @@
 ### 2.3 `问题`
 
 1. ~~引用各种jar包，但只想使用logback实现，如何做到？~~
-		- [multiple bindings](http://www.slf4j.org/codes.html#multiple_bindings)
+	- [multiple bindings](http://www.slf4j.org/codes.html#multiple_bindings)
 
 
 ## 三、关注网站
