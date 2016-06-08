@@ -34,6 +34,7 @@
 	- [~~有赞延迟队列设~~计](http://tech.youzan.com/queuing_delay)
 	- [~~分布式延迟消息队列~~](http://zhangyp.net/rabbitmq-delayqueue/)
 	- [rabbitmq](https://geewu.gitbooks.io/rabbitmq-quick)
+		- [Java Client](https://github.com/rabbitmq/rabbitmq-java-client)
 	- [beanstalk](http://kr.github.io/beanstalkd/download.html)
 		- [~~TrendrrBeanstalk源码阅读~~ Java Client](https://github.com/dustismo/TrendrrBeanstalk)
 		- [~~beanstalk原理分析~~](http://www.xuetimes.com/archives/567)
