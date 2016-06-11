@@ -82,6 +82,11 @@
 1. [知乎日报](http://daily.zhihu.com/)
 2. [v2ex](https://www.v2ex.com/)
 
+### 3.3 `只读经典`
+
+1. [思维改变生活@刘未鹏](https://www.douban.com/doulist/46003)
+2. [思考的技术与艺术@刘未鹏](https://www.douban.com/doulist/127649/)
+
 
 ## 四、读书 & 娱乐
 
