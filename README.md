@@ -58,19 +58,22 @@
 
 ### 2.3 `TODO List`
 
-1. Linux命令学习
+1. awk学习
+2. vim学习
+3. http & servlet & springMVC原理
+4. jetty
+5. 正则表达式
+6. 组内项目代码阅读
+6. Linux命令学习
 	- cat，more，less，chmod，chown，wc, tail，scp，find，grep，tar，curl，wget，awk，sed
 9. binlog痛苦 & 分库分表代码阅读
 10. HTTP协议学习
 11. Gitbook使用学习
 1. TCP/IP
-2. SpringMVC学习
-	- Servlet & JSP原理
 3. RPC框架学习
-	- 源码阅读
-		- Dubbo
-		- Motan
-		- SimpleRPC
+	- Dubbo
+	- Motan
+	- SimpleRPC
 	- [RPC基本概念](http://www.zmannotes.com/index.php/2015/10/22/rpc/)
 
 ### 2.3 `问题`
