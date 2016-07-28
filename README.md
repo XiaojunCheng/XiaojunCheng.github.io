@@ -58,6 +58,8 @@
 
 ### 2.3 `TODO List`
 
+1. 缓存更新问题
+2. zookeeper稳定性问题
 1. awk学习
 2. vim学习
 3. http & servlet & springMVC原理
