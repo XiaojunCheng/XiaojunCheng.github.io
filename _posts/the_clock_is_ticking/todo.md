@@ -28,6 +28,7 @@ title: 时间在流逝之todo清单
 	- [消息队列设计精要 - 美团](http://tech.meituan.com/mq-design.html)
 	- [分布式高可靠消息中间件－Hippo - 腾讯](http://data.qq.com/article?id=2670)
 	- [以携程为例，来看异步消息系统的架构设计和实践](http://mp.weixin.qq.com/s?__biz=MzA5Nzc4OTA1Mw==&mid=409707580&idx=1&sn=1e19c67918411790e8433308a93c2214#rd)
+	- [RocketMQ，队列选型](http://www.zmannotes.com/index.php/2016/01/17/rocketmq/)
 * 缓存更新问题
 * Zookeeper稳定性问题
 * Jetty使用
