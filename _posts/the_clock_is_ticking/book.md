@@ -8,7 +8,7 @@ title: 时间在流逝之书籍
 
 ## `思维-看待问题角度`
 
-* [学会提问](https://book.douban.com/subject/20428922/)
+* [学会提问](https://book.douban.com/subject/20428922/) `√`
   - 培养批判性思维
 * [你的灯亮着吗?](https://book.douban.com/subject/25772550/) `√`
   - 解决问题先得发现问题所在，社会生活中很多这样的示例，对自身处事方式有很大启发意义
