@@ -5,12 +5,20 @@ title: 时间在流逝之todo清单
 
 # TODO清单
 
+* 持续学习
+	- [ted教育](http://ed.ted.com/) 打开个人眼界
+* Linux运行状态透视
+	- pmap -x [pid]
+	- dtruss 查看系统调用
+	- dstat
 * HTTP协议学习
-* Http & Servlet & SpringMVC原理
+* HTTP协议学习 & Servlet & SpringMVC原理
 	- [Servlet 工作原理解析](http://www.ibm.com/developerworks/cn/java/j-lo-servlet/index.html)
 * 日志收集框架代码阅读
 * 消息队列学习总结
 	- [从Apache Kafka 重温文件高效读写](http://calvin1978.blogcn.com/articles/kafkaio.html)
+	- [消息队列设计精要 - 美团](http://tech.meituan.com/mq-design.html)
+	- [分布式高可靠消息中间件－Hippo - 腾讯](http://data.qq.com/article?id=2670)
 * 缓存更新问题
 * Zookeeper稳定性问题
 * Jetty使用
