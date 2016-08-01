@@ -26,4 +26,4 @@ title: 时间在流逝之书籍
 
 ## `管理能力`
 
-* [带人的技术](https://book.douban.com/subject/25980669/)
+* [带人的技术-不懂带人你就自己做到死](https://book.douban.com/subject/25980669/)
