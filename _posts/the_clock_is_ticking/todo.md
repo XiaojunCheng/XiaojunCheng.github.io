@@ -20,8 +20,9 @@ title: 时间在流逝之todo清单
 	- dtruss 查看系统调用
 	- dstat
 * 缓存更新问题
+* leveldb学习总结
 * Zookeeper稳定性问题
-* Jetty使用
+* okhttp组件学习
 * [使用 Grafana＋collectd＋InfluxDB 打造现代监控系统](http://www.vpsee.com/2015/03/a-modern-monitoring-system-built-with-grafana-collected-influxdb/)
 * awk学习
 * vim学习
