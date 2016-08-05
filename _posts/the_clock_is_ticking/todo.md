@@ -15,6 +15,7 @@ title: 时间在流逝之todo清单
 	- [How to Ask Better Questions](https://hbr.org/2009/05/real-leaders-ask.html)
 	- [十分钟后开始使用英语](http://xiaolai.li/2016/06/11/makecs-appendix01/)
 	- [张是之：个人如何通过自学构建经济学的思维方式](http://mp.weixin.qq.com/s?__biz=MzAxNzI4MTMwMw==&mid=2651630017&idx=1&sn=f8cd62f10f8fa04417d25754731a7b19#rd)
+	- [认知学习](http://www.yangzhiping.com/info/contact.html)
 * Linux运行状态透视
 	- pmap -x [pid]
 	- dtruss 查看系统调用
