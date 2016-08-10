@@ -8,4 +8,6 @@
   * [2016-06](2016/2016-06.md)
 * [电影清单](movie.md)
 * [书籍清单](book.md)
+* [出行清单](trip.md)
+* [烹饪&美食清单](cooking.md)
 * [todo清单](todo.md)
