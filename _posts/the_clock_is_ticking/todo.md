@@ -5,6 +5,8 @@ title: 时间在流逝之todo清单
 
 # TODO清单
 
+* 考驾照
+* 考雅思
 * 持续学习
 	- [ted教育](http://ed.ted.com/) 打开个人眼界
 	- [深度博客](http://www.geekonomics10000.com/about)
