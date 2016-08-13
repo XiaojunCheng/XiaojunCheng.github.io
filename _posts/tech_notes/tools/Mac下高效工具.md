@@ -1,0 +1,36 @@
+---
+layout: post
+title: `技术笔记` · `工具`
+---
+
+
+# Mac下高效工具
+
+- Github插件
+	- `Octotree`：为Github网页代码提供目录树，可以像IDE那样直接在Github浏览代码
+- Launch - 程序启动器
+	- `alfred` 免费
+- `Mou`
+	- http://25.io/mou/store/alipay/
+	- hi@25.io
+	- 交易号：2015082700001000660062544711
+- `MacDown`
+- `brew`
+- `Xmind`
+- `Evernote`
+- `SourceTree`
+- `The Unarchiver`
+- `Wireshark`
+- `Hex Fiend`
+- `Intellij Idea`
+	- 在线验证: `http://idea.qinxi1992.cn`
+- 快捷键工具
+	- `Manico`
+	- `ShortCat`
+- 排期工具
+	- `OmniPlan`
+   		- Name: SpecialK Team
+		- Serial: LMWQ-ITXE-BAQR-WOFN-MKBU-RDF
+- 流程图
+	- `OmniGraffle`
+	- `Astah`
