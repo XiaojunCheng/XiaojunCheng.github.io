@@ -1,16 +1,15 @@
 ---
 layout: post
-title: `生活`
+title: 生活
 ---
-
 
 # 生活
 
 ```
-宗旨：`live, love, laught`
+`live, love, laught`
 ```
 
-## 生活主题
+## 一、相关主题
 
 * [读书](book.md)
 	- [读书笔记](reading/README.md)

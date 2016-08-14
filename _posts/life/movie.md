@@ -1,8 +1,7 @@
 ---
 layout: post
-title: 时间在流逝之电影
+title: 时间在流逝 · 电影
 ---
-
 
 # 电影
 

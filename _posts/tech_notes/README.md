@@ -1,6 +1,6 @@
 ---
 layout: post
-title: `技术笔记`
+title: 技术笔记
 ---
 
 # 技术笔记
