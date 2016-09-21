@@ -10,5 +10,5 @@
 
 ## 3. 快捷键
 
-* ![Vim盲打版](_posts/0. 附录/0.1 图片/vim_cheat_sheet_for_programmers_colorblind.pdf)
-* ![Vim命令打印版](_posts/0. 附录/0.1 图片/vim_cheat_sheet_for_programmers_print.pdf)
+* ![Vim盲打版](../../0. 附录/0.1 图片/vim_cheat_sheet_for_programmers_colorblind.pdf)
+* ![Vim命令打印版](../../0. 附录/0.1 图片/vim_cheat_sheet_for_programmers_print.pdf)
