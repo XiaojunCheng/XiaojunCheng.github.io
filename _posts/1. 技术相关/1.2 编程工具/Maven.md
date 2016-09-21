@@ -1,25 +1,45 @@
-# Maven使用
+# Maven
 
-## 一、Maven插件
+## 1. Maven插件
 
 - [assembly](http://www.8qiu.cn/archives/315)
-maven常用插件介绍：
-- [其他插件](http://www.cnblogs.com/crazy-fox/archive/2012/02/09/2343722.html)
+- [maven常用插件介绍](http://www.cnblogs.com/crazy-fox/archive/2012/02/09/2343722.html)
 
 
-## 二、Maven常用命令
+## 2. Maven常用命令
 
-## 查看jar包依赖
-	mvn dependency:tree
-### 打包上传
-	mvn clean compile install deploy -Dmaven.test.skip=true
-### 打包部署包
-	mvn -U clean package -Dtest -DfailIfNoTests=false -Pbuild
-### 打tgz包
-	mvn assembly:assembly -DfinalName=<>  -Dmaven.test.skip=true
-### 只打依赖包到tgz包
-	mvn assembly:single
-### 打包源码
+`查看jar包依赖`
+
+```
+mvn dependency:tree
+```
+
+`打包上传`
+
+```
+mvn clean compile install deploy -Dmaven.test.skip=true
+```
+
+`打包部署包`
+
+```
+mvn -U clean package -Dtest -DfailIfNoTests=false -Pbuild
+```
+
+`打tgz包`
+	
+```
+mvn assembly:assembly -DfinalName=<>  -Dmaven.test.skip=true
+```
+
+`只打依赖包到tgz包`
+
+```
+mvn assembly:single
+```
+
+`打包源码`
+
 ```
 <build>
     <plugins>
@@ -39,7 +59,9 @@ maven常用插件介绍：
     </plugins>
 </build>
 ```
-### 把依赖包打到一个大jar包中
+
+`把依赖包打到一个大jar包中`
+
 ```
 <build>
     <plugins>
@@ -56,7 +78,8 @@ maven常用插件介绍：
 ```
 然后执行`mvn assembly:assembly -Dmaven.test.skip=true`
 
-### 不同环境配置参数过滤
+`不同环境配置参数过滤`
+
 ```
 <profiles>
     <profile>
@@ -97,6 +120,7 @@ maven常用插件介绍：
     </resources>
 </build>
 ```
+
 然后生产环境打包命令`mvn clean compile war:war -Pproduction`
 
 `mvn package –P${profileId}` profileId表示环境参数
