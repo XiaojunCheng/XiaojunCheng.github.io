@@ -8,6 +8,13 @@
 
 ## 2. Maven常用命令
 
+`强制更新依赖`
+
+```
+mvn clean install -e -U -Dmaven.test.skip=true
+-e详细异常，-U强制更新
+```
+
 `查看jar包依赖`
 
 ```

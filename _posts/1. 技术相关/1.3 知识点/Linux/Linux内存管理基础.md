@@ -1,8 +1,14 @@
-# Linux内存优化
+# Linux内存管理基础
 
 ## 一、基本概念
 
-### `Page Cache` vs `Buffer Cache`
+### `rss` resident set size 常驻内存
+
+### `paging` 分页
+
+### `virtual memory` 虚拟内存
+
+### `page cache` vs `buffer cache`
 
 Page Cache针对文件系统，VFS文件层cache，ext3文件格式下page cache大小为4k
 
@@ -14,26 +20,107 @@ linux kernel 2.4之后Buffer cache 和 page cache归并到一起了，都使用R
 
 ### `writeback`
 
-Page cache —> Storage
+page cache —> storage device
 
-`Linux 2.6.31`
+- `Linux 2.6.31`后台pdflush进程
+- `Linux 2.6.32`更有效的writeback mechanism（provide threads for each device），优化点如下
+    - writeback
+    - 虚拟内存de-duplication
+    - Btrfs提升与加速
 
-后台pdflush进程
+## 二、相关命令
 
-`Linux 2.6.32`
+查看系统配置
 
-后新的更有效的writeback mechanism（provide threads for eache device）
+```
+sysctl -a 显示所有的系统参数
+sysctl -p 从指定的文件加载系统参数，如不指定即从/etc/sysctl.conf中加载
+```
 
-flush-MAJOR
+建议系统参数值
 
-- [Page Cache](http://calvin1978.blogcn.com/articles/kafkaio.html)
+```
+sudo sysctl -w vm.max_map_count=655360
+sudo sysctl -w vm.dirty_ratio=10
+sudo sysctl -w vm.dirty_background_ratio=5
+sudo sysctl -w vm.min_free_kbytes=7000000
+sudo sysctl -p
+```
+
+参数说明
+
+```
+vm.min_free_kbytes 物理内存占比控制，保证物理内存有足够空闲空间，防止突发性换页
+vm.max_map_count mmap最大映射文件句柄数
+```
+
+如果希望系统参数永久生效，需修改`/etc/sysctl.conf`文件后重启生效
+
+```
+#vi /etc/sysctl.conf 
+vm.dirty_ratio = 10
+vm.dirty_background_ratio = 5
+```
+
+清空缓存命令
+
+```
+echo 3 > /proc/sys/vm/drop_caches
+
+缓存值说明:默认是0，1表示清空页缓存，2表示清空inode和目录树缓存，3清空所有的缓存
+```
+
+```
+vm.overcommit_memory 指定了内核针对内存分配的策略，其值可以是0、1、2
+                         
+0: 表示内核将检查是否有足够的可用内存供应用进程使用；如果有足够的可用内存，内存申请允许；否则，内存申请失败，并把错误返回给应用进程
+1: 表示内核允许分配所有的物理内存，而不管当前的内存状态如何
+2: 表示内核允许分配超过所有物理内存和交换空间总和的内存
+```
+
+pmap
+
+```
+pmap -x $PID
+```
+
+查看进程mmap及rss情况
+
+```
+cat /proc/meminfo
+cat /proc/$PID/maps
+cat /proc/$PID/numa_maps
+cat /proc/$PID/status 查看进程状态中的RSS指标（实际占用内存）
+dstat -cgilpymn
+collectl and collectd
+```
+
+## 三、参考文档
+
+- [page cache@wikipedia](https://en.wikipedia.org/wiki/Page_cache)
+- [virtual memory@wikipedia](https://en.wikipedia.org/wiki/Virtual_memory)
+- [探索 Linux 内存模型](http://www.ibm.com/developerworks/cn/linux/l-memmod/)
+- [从Apache Kafka 重温文件高效读写](http://calvin1978.blogcn.com/articles/kafkaio.html)
 - [Linux 2.6.32](https://kernelnewbies.org/Linux_2_6_32#head-72c3f91947738f1ea52f9ed21a89876730418a61)
-- [Page Cache](https://en.wikipedia.org/wiki/Page_cache)
 - [Linux Page Cache Basics](https://www.thomas-krenn.com/en/wiki/Linux_Page_Cache_Basics)
 - [Improving Linux performance by preserving Buffer Cache State](http://insights.oetiker.ch/linux/fadvise.html)
 - [Flushing out pdflush](http://lwn.net/Articles/326552/)
 - [In defense of per-BDI writeback](http://lwn.net/Articles/354851/)
 - [Linux Writeback机制分析](http://blog.csdn.net/myarrow/article/details/8918944)
+- [ANALYZING I/O PERFORMANCE IN LINUX](http://www.cmdln.org/2010/04/22/analyzing-io-performance-in-linux/)
+- [Efficient data transfer through zero copy](https://www.ibm.com/developerworks/linux/library/j-zerocopy/)
+- [Zero Copy](http://www.linuxjournal.com/article/6345)
+- [Tim Yang](http://timyang.net/)
+- [玩转CPU Topology@taobao](http://www.searchtb.com/2012/12/%E7%8E%A9%E8%BD%ACcpu-topology.html)
+- [NUMA架构的CPU -- 你真的用好了么？](http://cenalulu.github.io/linux/numa/)
+- [sysctl.conf学习和调优](https://wsgzao.github.io/post/sysctl/)
+
+### TODO
+
+- `Radix Tree`
+
+http://linux.it.net.cn/e/bug/2016/0102/19226.html
+https://www.blackmoreops.com/2014/09/22/linux-kernel-panic-issue-fix-hung_task_timeout_secs-blocked-120-seconds-problem/
 
 page cache & mmap
 1、kernel如何管理虚拟内存
@@ -93,7 +180,4 @@ read ahead（preloads）
 - copy on write技术
 - 内存管理：http://dongxicheng.org/os/linux-memory-management-basic/
 
-参考资料
 
-- Efficient data transfer through zero copy：https://www.ibm.com/developerworks/linux/library/j-zerocopy/
-- Zero Copy：http://www.linuxjournal.com/article/6345
