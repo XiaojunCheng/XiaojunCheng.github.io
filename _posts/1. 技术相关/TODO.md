@@ -1,0 +1,23 @@
+# TODO
+
+- lambda [x]
+    - [Java 8 tutorials](https://www.gitbook.com/book/wizardforcel/java8-tutorials)
+- select for update [x]
+- mongodb
+    - 部署 [x]
+    - 了解通用使用场景
+- aop
+    - 基本原理
+    - 代码实现
+    - 相关
+        - asm
+        - 动态代理
+- mybatis
+    - 使用
+    - 基本原理
+- redis
+    - lua script
+    - lock
+- idempotence
+    - [分布式系统互斥性与幂等性问题的分析与解决- 美团](http://tech.meituan.com/distributed-system-mutually-exclusive-idempotence-cerberus-gtis.html)
+    - [系统幂等以及常用实现方式](http://yongpoliu.com/idempotent/)

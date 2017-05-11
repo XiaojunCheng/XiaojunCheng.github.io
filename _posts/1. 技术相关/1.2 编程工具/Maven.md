@@ -25,6 +25,7 @@ mvn dependency:tree
 
 ```
 mvn clean compile install deploy -Dmaven.test.skip=true
+mvn clean deploy -Dmaven.test.skip -Dmaven.javadoc.skip
 ```
 
 `打包部署包`
