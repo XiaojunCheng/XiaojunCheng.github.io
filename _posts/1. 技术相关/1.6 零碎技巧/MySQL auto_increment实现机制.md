@@ -2,6 +2,8 @@
 
 ## 一、实现原理
 
+在传统的auto_increment设置中,每次访问auto-increment计数器的时候, INNODB都会加上一个名为AUTO-INC锁直到该语句结束(注意锁只持有到语句结束,不是事务结束).AUTO-INC锁是一个特殊的表级别的锁,用来提升包含auto_increment列的并发插入性能
+
 ## 二、使用中的注意事项
 
 

@@ -3,21 +3,44 @@
 - lambda [x]
     - [Java 8 tutorials](https://www.gitbook.com/book/wizardforcel/java8-tutorials)
 - select for update [x]
-- mongodb
-    - 部署 [x]
-    - 了解通用使用场景
+- mongodb: 部署 & 了解通用使用场景 [x]
 - aop
     - 基本原理
     - 代码实现
     - 相关
         - asm
+        - javaassist
         - 动态代理
 - mybatis
     - 使用
     - 基本原理
+    - 生成原理
 - redis
     - lua script
     - lock
 - idempotence
     - [分布式系统互斥性与幂等性问题的分析与解决- 美团](http://tech.meituan.com/distributed-system-mutually-exclusive-idempotence-cerberus-gtis.html)
     - [系统幂等以及常用实现方式](http://yongpoliu.com/idempotent/)
+- 服务降级：
+    - Hystrix
+- 工具学习使用
+    - btrace
+    - greys anatomy
+    - jprofiler
+        - 数据来源
+            - JVMTI (JVM Tool Interface)
+            - instruments classes
+        - 采集方式
+            - Sampling
+            - Instrument
+        - [常用 Java Profiling 工具的分析与比较](https://www.ibm.com/developerworks/cn/java/j-lo-profiling/)
+        - [Java剖析工具JProfiler入门使用教程：远程剖析](https://www.evget.com/article/2013/5/20/18944.html)
+- 性能指标监控 & 埋点 & 收集 & 展示
+    - 监控：profile
+    - 埋点：vrecorder
+    - 收集：flume -> influxdb
+    - 展示：？？？
+- 缓存与DB数据一致
+    - 每个组件都可能出错
+- SwitchHosts!
+
