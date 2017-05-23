@@ -2,7 +2,9 @@
 
 - lambda [x]
     - [Java 8 tutorials](https://www.gitbook.com/book/wizardforcel/java8-tutorials)
-- select for update [x]
+- mysql锁
+    - select for update [x]
+    - [mysql timeout变量探秘](http://www.jianshu.com/p/a5747a382a0a)
 - mongodb: 部署 & 了解通用使用场景 [x]
 - aop
     - 基本原理
@@ -10,11 +12,17 @@
     - 相关
         - asm
         - javaassist
-        - 动态代理
+        - cglib
 - mybatis
-    - 使用
-    - 基本原理
-    - 生成原理
+    - [原理分析](http://blog.csdn.net/luanlouis/article/details/40422941)
+    - [MyBatis原理深入解析](http://www.jianshu.com/p/ec40a82cae28)
+    - [mybatis缓存](https://my.oschina.net/KingPan/blog/280167#OSC_h1_1)
+    - [Hibernate与 MyBatis的比较](http://blog.csdn.net/firejuly/article/details/8190229)
+    - 知识点
+        - 缓存策略
+        - 延迟初始化
+        - session管理机制
+        - 合理批量获取
 - redis
     - lua script
     - lock
