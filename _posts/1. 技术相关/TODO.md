@@ -6,13 +6,23 @@
     - select for update [x]
     - [mysql timeout变量探秘](http://www.jianshu.com/p/a5747a382a0a)
 - mongodb: 部署 & 了解通用使用场景 [x]
-- aop
-    - 基本原理
-    - 代码实现
-    - 相关
+- gradle
+- spring
+    - springMVC
+    - aop
+        - 基本原理
+        - 相关框架分析
         - asm
         - javaassist
         - cglib
+        - objenesis
+            - 是一个绕过构造方法来实例化一个对象的工具包
+        - 相关问题
+            - Java 动态代理局限性
+            - 其他字节码框架局限性比较
+            - 性能比较
+            - 适用场景
+    - 分析mockito原理
 - mybatis
     - [原理分析](http://blog.csdn.net/luanlouis/article/details/40422941)
     - [MyBatis原理深入解析](http://www.jianshu.com/p/ec40a82cae28)
@@ -29,8 +39,10 @@
 - idempotence
     - [分布式系统互斥性与幂等性问题的分析与解决- 美团](http://tech.meituan.com/distributed-system-mutually-exclusive-idempotence-cerberus-gtis.html)
     - [系统幂等以及常用实现方式](http://yongpoliu.com/idempotent/)
-- 服务降级：
-    - Hystrix
+- Netflix
+    - Hystrix：服务降级
+    - Zuul：边缘网关服务
+        - [Netflix Zuul调研](http://jackywu.github.io/articles/Netflix-Zuul/)
 - 工具学习使用
     - btrace
     - greys anatomy
@@ -48,7 +60,21 @@
     - 埋点：vrecorder
     - 收集：flume -> influxdb
     - 展示：？？？
+    - 缓存命中率是如何做的？
 - 缓存与DB数据一致
     - 每个组件都可能出错
-- SwitchHosts!
+- 德国心理学家艾宾浩斯曲线
+    - 记忆编码理论：必须动手构建知识树
+    - 内隐语言理论：打破学习错觉
+    - 情绪绩效理论：压力是资源
+    - 合理休息：休息也是学习
+- 业务系统关注点
+    - 数据一致性
+    - 问题排查 & 变更记录 & 业务幂等
+        - 全局ID生成
+        - 操作日志记录
+    - 性能优化
+    - 容灾降级
+        - 外部依赖梳理
+        - 服务降级
 
