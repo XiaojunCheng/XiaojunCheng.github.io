@@ -5,3 +5,4 @@ MySQL InnoDB默认Row-Level Lock，所以只有「明确」地指定主键，MyS
 lock in share mode适用于两张表存在业务关系时的一致性要求，for  update适用于操作同一张表时的一致性要求
 
 [innodb-locking-reads](https://dev.mysql.com/doc/refman/5.7/en/innodb-locking-reads.html)
+[悲观锁总结](http://chenzhou123520.iteye.com/blog/1860954)

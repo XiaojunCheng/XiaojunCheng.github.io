@@ -8,13 +8,16 @@
 - mongodb: 部署 & 了解通用使用场景 [x]
 - gradle
 - spring
-    - springMVC
+    - ioc
+        - 如何做延迟初始化 [x]
+        - 如何做依赖注入 [x]
     - aop
-        - 基本原理
+        - 基本原理 [x]
         - 相关框架分析
+            - aspectJ
         - asm
         - javaassist
-        - cglib
+        - cglib (Code Generation Library)
         - objenesis
             - 是一个绕过构造方法来实例化一个对象的工具包
         - 相关问题
@@ -23,6 +26,8 @@
             - 性能比较
             - 适用场景
     - 分析mockito原理
+    - [springMVC](http://docs.spring.io/spring/docs/current/spring-framework-reference/html/mvc.html)
+    - [lombok](http://www.raychase.net/1584)
 - mybatis
     - [原理分析](http://blog.csdn.net/luanlouis/article/details/40422941)
     - [MyBatis原理深入解析](http://www.jianshu.com/p/ec40a82cae28)
