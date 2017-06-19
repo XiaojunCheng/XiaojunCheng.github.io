@@ -1,4 +1,6 @@
-# MySQL select for update使用说明
+# MySQL悲观锁使用总结
+
+select for update使用说明
 
 MySQL InnoDB默认Row-Level Lock，所以只有「明确」地指定主键，MySQL 才会执行Row lock (只锁住被选取的数据) ，否则MySQL 将会执行Table Lock (将整个数据表单给锁住)
 

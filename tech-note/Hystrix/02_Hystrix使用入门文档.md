@@ -28,8 +28,11 @@ public class ItemLockServiceClient {
 ...
 ```
 
+### 1.1 封装Hystrix Command
 
-### 1.1 实现ItemLockGetFieldLockCommand
+#### HystrixCommand方式
+
+继承HystrixCommand，业务逻辑写在run方法中
 
 ```
 public class ItemLockGetFieldLockCommand extends HystrixCommand<PlainResult<ItemFieldLockModel>> {
@@ -38,18 +41,19 @@ public class ItemLockGetFieldLockCommand extends HystrixCommand<PlainResult<Item
         HystrixCommand.Setter.withGroupKey(HystrixCommandGroupKey.Factory.asKey("ItemLock"))
                 .andCommandKey(HystrixCommandKey.Factory.asKey("GetFieldLock"))
                 .andThreadPoolPropertiesDefaults(HystrixThreadPoolProperties.Setter().
-                        withCoreSize(5).withMaximumSize(5).withMaxQueueSize(5).withAllowMaximumSizeToDivergeFromCoreSize(true))
+                        withCoreSize(5).//
+                        withMaximumSize(5).//
+                        withMaxQueueSize(5).//
+                        withAllowMaximumSizeToDivergeFromCoreSize(true))
                 .andCommandPropertiesDefaults(HystrixCommandProperties.Setter()
                         .withExecutionTimeoutInMilliseconds(1000)
                         .withMetricsRollingStatisticalWindowInMilliseconds(50)
                         .withMetricsRollingPercentileWindowBuckets(10)
                         .withMetricsRollingPercentileBucketSize(100)
-                        .withCircuitBreakerErrorThresholdPercentage(50)
-                        .withMetricsRollingStatisticalWindowBuckets(10)
                         .withMetricsRollingStatisticalWindowInMilliseconds(10000)
                         .withCircuitBreakerEnabled(true)
                         .withCircuitBreakerErrorThresholdPercentage(50)
-                        .withCircuitBreakerSleepWindowInMilliseconds(5000));
+                        .withCircuitBreakerRequestVolumeThreshold(20));
 
     private ItemLockService itemLockService;
     private ItemIdParam param;
@@ -65,46 +69,109 @@ public class ItemLockGetFieldLockCommand extends HystrixCommand<PlainResult<Item
         return itemLockService.getFieldLockByItemId(param)
     }
 
+    /**
+     * 通过提供一个失败回退的方法，Hystrix 在主命令逻辑发生异常时能从这个方法中得到一个默认值或者一些数据作为命令的返回值，从而实现优雅的服务降级
+     */
     @Override
     protected PlainResult<ItemFieldLockModel> getFallback() {
-        LOGGER.warn("[{}-{}] execute fallback",
-                ItemLockServiceClientV2.class.getSimpleName(),//
-                ItemLockGetFieldLockCommand.class.getSimpleName());//
         return null;
     }
 ...
 ```
 
-### 1.2 调用商品锁服务时调用ItemLockGetFieldLockCommand#execute
+调用HystrixCommand
 
 ```
 public class ItemLockServiceClientV2 {
 
-    @Resource
-    private ItemLockService itemLockService;
-
     public ItemFieldLockModel getFieldLockByItemId(Long kdtId, Long itemId) {
-
-        ItemIdParam itemIdParam = new ItemIdParam();
-        itemIdParam.setItemId(itemId);
-        itemIdParam.setKdtId(kdtId);
-
+        ...
         ItemLockGetFieldLockCommand command = new ItemLockGetFieldLockCommand(itemLockService, itemIdParam);
         PlainResult<ItemFieldLockModel> result = command.execute();
         if (RpcResultUtil.isFailed(result)) {
             LOGGER.warn("查询失败,param=" + itemIdParam + ",code=" + result.getCode() + ",msg=" + result.getMessage());
         }
-        RpcResultUtil.assertDubboFailed(result);
-        return result.getData();
+        ...
     }
 ...
 ```
 
-### 1.3 搜集metrix信息
+#### HystrixObservableCommand方式
+
+继承HystrixObservableCommand，业务逻辑写在construct方法中
+
+```
+public class ItemLockGetFieldLockObservableCommand extends HystrixObservableCommand<PlainResult<ItemFieldLockModel>> {
+
+    private ItemLockService itemLockService;
+    private ItemIdParam param;
+
+    protected ItemLockGetFieldLockObservableCommand(ItemLockService itemLockService, ItemIdParam param) {
+        super(HystrixCommandGroupKey.Factory.asKey("ItemLock"));
+        this.itemLockService = itemLockService;
+        this.param = param;
+    }
+
+
+    @Override
+    protected Observable<PlainResult<ItemFieldLockModel>> construct() {
+        return Observable.create(new Observable.OnSubscribe<PlainResult<ItemFieldLockModel>>() {
+            @Override
+            public void call(Subscriber<? super PlainResult<ItemFieldLockModel>> observer) {
+                try {
+                    PlainResult<ItemFieldLockModel> result = itemLockService.getFieldLockByItemId(param);
+                    if (!observer.isUnsubscribed()) {
+                        observer.onNext(result);
+                        observer.onCompleted();
+                    }
+                } catch (Exception e) {
+                    observer.onError(e);
+                }
+            }
+        }).subscribeOn(Schedulers.io());
+    }
+
+    /**
+     * 对应于HystrixCommand#getFallback
+     */
+    @Override
+    protected Observable<PlainResult<ItemFieldLockModel>> resumeWithFallback() {
+        return Observable.create(
+                new Observable.OnSubscribe<PlainResult<ItemFieldLockModel>>(){
+                    public void call(Subscriber<? super PlainResult<ItemFieldLockModel>> subscriber) {
+                        if (!subscriber.isUnsubscribed()) {
+                            subscriber.onNext(null);
+                            subscriber.onCompleted();
+                        }
+                    }
+                }
+        ).subscribeOn(Schedulers.io());
+    }
+...
+```
+
+调用HystrixObservableCommand
+
+```
+public class ItemLockServiceClientV3 {
+
+    public ItemFieldLockModel getFieldLockByItemId(Long kdtId, Long itemId) {
+        ...
+        ItemLockGetFieldLockObservableCommand command = new ItemLockGetFieldLockObservableCommand(itemLockService, itemIdParam);
+        PlainResult<ItemFieldLockModel> result = command.observe().toBlocking().single();
+        if (RpcResultUtil.isFailed(result)) {
+            LOGGER.warn("查询失败,param=" + itemIdParam + ",code=" + result.getCode() + ",msg=" + result.getMessage());
+        }
+        ...
+    }
+...
+```
+
+### 1.2 搜集Hystrix Metrix信息
 
 这一步是收集metric信息，用于展示应用及服务状态，以帮助做决策判断
 
-#### 1.3.1 实现HystrixMetricsInitializingBean
+#### 实现HystrixMetricsInitializingBean
 
 ```
 public class HystrixMetricsInitializingBean {
@@ -124,43 +191,55 @@ public class HystrixMetricsInitializingBean {
         });
     }
 
-    private void processThreadPoolMetric(HystrixThreadPoolMetrics threadPoolMetric) {
-        //TODO 示例只是简单输出相关统计信息
-        LOGGER.info("==================== thread pool metric");
-        LOGGER.info("thread pool: " + threadPoolMetric.getThreadPoolKey().name());
-        LOGGER.info("rolling count executed: " + threadPoolMetric.getRollingCountThreadsExecuted());
-        LOGGER.info("rolling count rejected: " + threadPoolMetric.getRollingCountThreadsRejected());
-        LOGGER.info("cumulative count rejected: " + threadPoolMetric.getCumulativeCountThreadsExecuted());
-        LOGGER.info("cumulative count rejected: " + threadPoolMetric.getCumulativeCountThreadsRejected());
-        LOGGER.info("active count: " + threadPoolMetric.getCurrentActiveCount());
-        LOGGER.info("completed task count: " + threadPoolMetric.getCurrentCompletedTaskCount());
-        LOGGER.info("core pool size: " + threadPoolMetric.getCurrentCompletedTaskCount());
-        LOGGER.info("pool size: " + threadPoolMetric.getCurrentCompletedTaskCount());
-        LOGGER.info("queue size: " + threadPoolMetric.getCurrentCompletedTaskCount());
-        LOGGER.info("task count: " + threadPoolMetric.getCurrentCompletedTaskCount());
+    public static void processThreadPoolMetric(HystrixThreadPoolMetrics threadPoolMetric) {
+
+        ThreadPoolMetricDO metricDO = new ThreadPoolMetricDO();
+        metricDO.setCurrentTime(System.currentTimeMillis());
+        metricDO.setThreadPoolKey(threadPoolMetric.getThreadPoolKey().name());
+
+        metricDO.setRollingCountThreadsExecuted(threadPoolMetric.getRollingCountThreadsExecuted());
+        metricDO.setRollingCountThreadsRejected(threadPoolMetric.getRollingCountThreadsRejected());
+
+        metricDO.setCumulativeCountThreadsExecuted(threadPoolMetric.getCumulativeCountThreadsExecuted());
+        metricDO.setCumulativeCountThreadsRejected(threadPoolMetric.getCumulativeCountThreadsRejected());
+
+        metricDO.setCurrentActiveCount(threadPoolMetric.getCurrentActiveCount().intValue());
+        metricDO.setCurrentCompletedTaskCount(threadPoolMetric.getCurrentCompletedTaskCount().longValue());
+
+        metricDO.setCurrentCorePoolSize(threadPoolMetric.getCurrentCorePoolSize().intValue());
+        metricDO.setCurrentPoolSize(threadPoolMetric.getCurrentPoolSize().intValue());
+
+        metricDO.setCurrentQueueSize(threadPoolMetric.getCurrentQueueSize().intValue());
+        metricDO.setCurrentTaskCount(threadPoolMetric.getCurrentTaskCount().intValue());
+
+        System.out.println(metricDO);
+        //TODO send to MQ or write to storage
     }
 
-    private void processCommandMetric(HystrixCommandMetrics commandMetric) {
-        //TODO 示例只是简单输出相关统计信息
-        LOGGER.info("==================== command metric");
-        LOGGER.info("command group: " + commandMetric.getCommandGroup());
-        LOGGER.info("command: " + commandMetric.getCommandKey().name());
-        LOGGER.info("thread pool: " + commandMetric.getThreadPoolKey().name());
-        LOGGER.info("total time mean: " + commandMetric.getTotalTimeMean());
-        LOGGER.info("execution time mean: " + commandMetric.getExecutionTimeMean());
-        LOGGER.info("concurrent execution count: " + commandMetric.getCurrentConcurrentExecutionCount());
+    public static void processCommandMetric(HystrixCommandMetrics commandMetric) {
+
+        CommandMetricDO metricDO = new CommandMetricDO();
+        metricDO.setCurrentTime(System.currentTimeMillis());
+        metricDO.setCommandGroup(commandMetric.getCommandGroup().name());
+        metricDO.setCommandName(commandMetric.getCommandKey().name());
+        metricDO.setThreadPoolKey(commandMetric.getThreadPoolKey().name());
+
+        metricDO.setTotalTimeMean(commandMetric.getTotalTimeMean());
+        metricDO.setExecutionTimeMean(commandMetric.getExecutionTimeMean());
+        metricDO.setCurrentConcurrentExecutionCount( commandMetric.getCurrentConcurrentExecutionCount());
 
         HystrixCommandMetrics.HealthCounts health = commandMetric.getHealthCounts();
-        LOGGER.info("totalRequests: " + health.getTotalRequests());
-        LOGGER.info("errorCount: " + health.getErrorCount());
-        LOGGER.info("errorPercentage: " + health.getErrorPercentage());
+        metricDO.setTotalRequests(health.getTotalRequests());
+        metricDO.setErrorCount(health.getErrorCount());
+        metricDO.setErrorPercentage(health.getErrorPercentage());
+
+        System.out.println(metricDO);
+        //TODO send to MQ or write to storage
     }
 ...
 ```
 
 备注：这一步只是简单的输出了应用相关的统计信息，真实应用中这一步一般的处理策略是将统计信息封装成对象发送到MQ中，由对应的处理程序接受MQ消息处理后进行展示
-
-#### 1.3.2
 
 在application-context.xml文件中配置
 
@@ -242,12 +321,26 @@ maxQueueSize | 最大队列长度。设置BlockingQueue的最大长度 | -1 | �
 queueSizeRejectionThreshold | 设置拒绝请求的临界值 | 5 | 此属性不适用于maxQueueSize = - 1时 设置设个值的原因是maxQueueSize值运行时不能改变，我们可以通过修改这个变量动态修改允许排队的长度
 keepAliveTimeMinutes | 设置keep-live时间 | 1分钟 | 
 
+### 启动之后无法修改生效的参数配置
+
+- `metrics.rollingStats.timeInMilliseconds`
+- `metrics.rollingStats.numBuckets`
+- `metrics.rollingPercentile.timeInMilliseconds`
+- `metrics.rollingPercentile.numBuckets`
+- `metrics.rollingPercentile.bucketSize`
+
 
 ## 附录
 
 ### 参考文档
 
+- [官方文档：Hystrix文档-如何使用](https://github.com/Netflix/Hystrix/wiki/How-To-Use)
 - [Hystrix参数详解](http://tietang.wang/2016/02/25/hystrix/Hystrix%E5%8F%82%E6%95%B0%E8%AF%A6%E8%A7%A3/)
 - [使用Hystrix实现自动降级与依赖隔离](http://www.jianshu.com/p/138f92aa83dc)
+- [Hystrix 那些事](https://juejin.im/entry/58d4d8f5b123db3f6b6485ec)
+- [弹性应用的开发利器Hystrix](https://www.gitbook.com/book/stonetingxin/hystrix)
+- [Hystrix 使用与分析](http://hot66hot.iteye.com/blog/2155036)
+- [Hystrix使用入门手册（中文）](http://www.jianshu.com/p/b9af028efebb)
+- [【翻译】Hystrix文档-如何使用](http://youdang.github.io/2016/08/15/translate-hystrix-wiki-how-to-use/#request-collapsing)
 
 
