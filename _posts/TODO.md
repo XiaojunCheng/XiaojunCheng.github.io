@@ -1,5 +1,14 @@
 # TODO
 
+- tcpdump + wireshark
+- web框架spark
+- freeMark
+- Lua
+- Nginx
+- OpenResty
+- Shell
+- XML Schema Definition
+- UML图
 - lambda [x]
     - [Java 8 tutorials](https://www.gitbook.com/book/wizardforcel/java8-tutorials)
 - mysql锁
@@ -11,23 +20,8 @@
     - ioc
         - 如何做延迟初始化 [x]
         - 如何做依赖注入 [x]
-    - aop
-        - 基本原理 [x]
-        - 相关框架分析
-            - aspectJ
-        - asm
-        - javaassist
-        - cglib (Code Generation Library)
-        - objenesis
-            - 是一个绕过构造方法来实例化一个对象的工具包
-        - 相关问题
-            - Java 动态代理局限性
-            - 其他字节码框架局限性比较
-            - 性能比较
-            - 适用场景
-    - 分析mockito原理
     - [springMVC](http://docs.spring.io/spring/docs/current/spring-framework-reference/html/mvc.html)
-    - [lombok](http://www.raychase.net/1584)
+    - 分析mockito原理[lombok](http://www.raychase.net/1584)
 - mybatis
     - [原理分析](http://blog.csdn.net/luanlouis/article/details/40422941)
     - [MyBatis原理深入解析](http://www.jianshu.com/p/ec40a82cae28)
@@ -63,8 +57,6 @@
 - 性能指标监控 & 埋点 & 收集 & 展示
     - 监控：profile
     - 埋点：vrecorder
-    - 收集：flume -> influxdb
-    - 展示：？？？
     - 缓存命中率是如何做的？
 - 缓存与DB数据一致
     - 每个组件都可能出错
